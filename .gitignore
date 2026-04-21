@@ -1,2 +1,9 @@
-
+# IntelliJ IDEA
 .idea/
+
+# VS Code
+.vscode/
+
+# macOS system files
+.DS_Store
+**/.DS_Store
