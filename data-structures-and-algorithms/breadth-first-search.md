@@ -40,14 +40,14 @@ Here is the standard step-by-step logic for BFS:
 Let's trace a BFS on a simple graph. 
 
 **The Graph:**
-```text
-    A
-   / \
-  B   C
-  |   |
-  D   E
-   \ /
-    F
+```mermaid
+graph TD
+    A --> B
+    A --> C
+    B --> D
+    C --> E
+    D --> F
+    E --> F
 ```
 
 **Goal:** Traverse the whole graph starting from **A**.

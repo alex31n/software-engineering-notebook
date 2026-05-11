@@ -85,8 +85,8 @@ Let's walk through three well-known greedy problems with full explanations and c
 ```mermaid
 gantt
     title Activity Selection (Greedy)
-    dateFormat X
-    axisFormat %s
+    dateFormat D
+    axisFormat %d
 
     section Selected
     A (1-3) ✅           :done, a, 1, 3
@@ -366,14 +366,14 @@ Step 4: Merge two smallest → [cde](6) + [ba](9) = [root](15)
 
 ```mermaid
 graph TD
-    Root["(15)"] -->|0| CDE["(6)"]
-    Root -->|1| BA["(9)"]
-    CDE -->|0| C["c (3)"]
-    CDE -->|1| DE["(3)"]
-    DE -->|0| D["d (2)"]
-    DE -->|1| E["e (1)"]
-    BA -->|0| B["b (4)"]
-    BA -->|1| A["a (5)"]
+    Root(("(15)")) -->|0| CDE(("(6)"))
+    Root -->|1| BA(("(9)"))
+    CDE -->|0| C(("c (3)"))
+    CDE -->|1| DE(("(3)"))
+    DE -->|0| D(("d (2)"))
+    DE -->|1| E(("e (1)"))
+    BA -->|0| B(("b (4)"))
+    BA -->|1| A(("a (5)"))
 ```
 
 **Final Codes:**
