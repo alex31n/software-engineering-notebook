@@ -1,4 +1,4 @@
-# Heaps / Priority Queues
+# Heaps and Priority Queues
 
 A **Heap** is a special type of binary tree that satisfies one simple rule: the parent node is always "more important" than its children. A **Priority Queue** is the abstract concept — a queue where elements come out in order of priority, not in the order they were added. A Heap is the most common way to implement a Priority Queue.
 
