@@ -17,62 +17,30 @@ This is the most common smell. You find the exact same (or very similar) lines o
 ### ❌ Smelly Code
 Notice how the math for the circle's area is written twice.
 
-**Python:**
-```python
-def print_circle_area(radius):
-    area = 3.14159 * radius * radius
-    print(f"The area is {area}")
+```javascript
+function printCircleArea(radius):
+    variable area = 3.14159 * radius * radius
+    print("The area is " + area)
 
-def print_cylinder_volume(radius, height):
-    base_area = 3.14159 * radius * radius
-    volume = base_area * height
-    print(f"The volume is {volume}")
-```
-
-**Java:**
-```java
-public void printCircleArea(double radius) {
-    double area = 3.14159 * radius * radius;
-    System.out.println("The area is " + area);
-}
-
-public void printCylinderVolume(double radius, double height) {
-    double baseArea = 3.14159 * radius * radius;
-    double volume = baseArea * height;
-    System.out.println("The volume is " + volume);
-}
+function printCylinderVolume(radius, height):
+    variable baseArea = 3.14159 * radius * radius
+    variable volume = baseArea * height
+    print("The volume is " + volume)
 ```
 
 ### ✅ Clean Code
-We moved the math into its own function `get_circle_area` / `getCircleArea`. Now, if we want to change `3.14159` to `Math.PI`, we only have to change it in one place!
+We moved the math into its own function `getCircleArea`. Now, if we want to change `3.14159` to `Math.PI`, we only have to change it in one place!
 
-**Python:**
-```python
-def get_circle_area(radius):
+```javascript
+function getCircleArea(radius):
     return 3.14159 * radius * radius
 
-def print_circle_area(radius):
-    print(f"The area is {get_circle_area(radius)}")
+function printCircleArea(radius):
+    print("The area is " + getCircleArea(radius))
 
-def print_cylinder_volume(radius, height):
-    volume = get_circle_area(radius) * height
-    print(f"The volume is {volume}")
-```
-
-**Java:**
-```java
-public double getCircleArea(double radius) {
-    return 3.14159 * radius * radius;
-}
-
-public void printCircleArea(double radius) {
-    System.out.println("The area is " + getCircleArea(radius));
-}
-
-public void printCylinderVolume(double radius, double height) {
-    double volume = getCircleArea(radius) * height;
-    System.out.println("The volume is " + volume);
-}
+function printCylinderVolume(radius, height):
+    variable volume = getCircleArea(radius) * height
+    print("The volume is " + volume)
 ```
 
 ---
@@ -86,63 +54,33 @@ This smell happens when you use numbers or text strings directly in your code wi
 ### ❌ Smelly Code
 What do `1`, `2`, `0.90`, and `0.80` mean? We have to guess.
 
-**Python:**
-```python
-def calculate_discount(price, user_type):
-    if user_type == 1:
+```javascript
+function calculateDiscount(price, userType):
+    if userType == 1:
         return price * 0.90
-    elif user_type == 2:
+    else if userType == 2:
         return price * 0.80
+    
     return price
-```
-
-**Java:**
-```java
-public double calculateDiscount(double price, int userType) {
-    if (userType == 1) {
-        return price * 0.90;
-    } else if (userType == 2) {
-        return price * 0.80;
-    }
-    return price;
-}
 ```
 
 ### ✅ Clean Code
 By assigning those numbers to named variables, the code reads like a plain English sentence.
 
-**Python:**
-```python
-REGULAR_USER = 1
-PREMIUM_USER = 2
+```javascript
+constant REGULAR_USER = 1
+constant PREMIUM_USER = 2
 
-REGULAR_DISCOUNT = 0.90
-PREMIUM_DISCOUNT = 0.80
+constant REGULAR_DISCOUNT = 0.90
+constant PREMIUM_DISCOUNT = 0.80
 
-def calculate_discount(price, user_type):
-    if user_type == PREMIUM_USER:
+function calculateDiscount(price, userType):
+    if userType == PREMIUM_USER:
         return price * PREMIUM_DISCOUNT
-    elif user_type == REGULAR_USER:
+    else if userType == REGULAR_USER:
         return price * REGULAR_DISCOUNT
+        
     return price
-```
-
-**Java:**
-```java
-public static final int REGULAR_USER = 1;
-public static final int PREMIUM_USER = 2;
-
-public static final double REGULAR_DISCOUNT = 0.90;
-public static final double PREMIUM_DISCOUNT = 0.80;
-
-public double calculateDiscount(double price, int userType) {
-    if (userType == PREMIUM_USER) {
-        return price * PREMIUM_DISCOUNT;
-    } else if (userType == REGULAR_USER) {
-        return price * REGULAR_DISCOUNT;
-    }
-    return price;
-}
 ```
 
 ---
@@ -156,85 +94,43 @@ A function that is dozens or hundreds of lines long. It tries to do too many thi
 ### ❌ Smelly Code
 This function acts as a "God Method"—it tries to run the whole business by itself.
 
-**Python (Pseudo-code):**
-```python
-def process_order(order):
-    # 1. Validate order
-    if not order.items:
-        raise Exception("No items")
-    if not order.user_id:
-        raise Exception("No user")
-    
-    # 2. Calculate total
-    total = 0
-    for item in order.items:
-        total += item.price * item.quantity
-    
-    # 3. Apply tax
-    total = total + (total * 0.08)
-    
-    # 4. Save to database
-    # database.save(order, total)
-    
-    # 5. Send email
-    # email_service.send("Order processed!")
-    return total
-```
-
-**Java (Pseudo-code):**
-```java
-public double processOrder(Order order) throws Exception {
+```javascript
+function processOrder(order):
     // 1. Validate order
-    if (order.getItems().isEmpty()) {
-        throw new Exception("No items");
-    }
-    if (order.getUserId() == null) {
-        throw new Exception("No user");
-    }
+    if order.items.isEmpty():
+        throw Error("No items")
+    if order.userId == null:
+        throw Error("No user")
     
     // 2. Calculate total
-    double total = 0;
-    for (Item item : order.getItems()) {
-        total += item.getPrice() * item.getQuantity();
-    }
+    variable total = 0
+    for item in order.items:
+        total = total + (item.price * item.quantity)
     
     // 3. Apply tax
-    total = total + (total * 0.08);
+    total = total + (total * 0.08)
     
     // 4. Save to database
-    // database.save(order, total);
+    // database.save(order, total)
     
     // 5. Send email
-    // emailService.send("Order processed!");
+    // emailService.send("Order processed!")
     
-    return total;
-}
+    return total
 ```
 
 ### ✅ Clean Code
 The main method now reads like a table of contents. If there is a bug in the tax calculation, you know exactly which smaller function to look at.
 
-**Python:**
-```python
-def process_order(order):
-    validate_order(order)
-    subtotal = calculate_subtotal(order.items)
-    total_with_tax = apply_tax(subtotal)
-    save_order_to_db(order, total_with_tax)
-    send_confirmation_email(order.user)
-    return total_with_tax
-```
-
-**Java:**
-```java
-public double processOrder(Order order) throws Exception {
-    validateOrder(order);
-    double subtotal = calculateSubtotal(order.getItems());
-    double totalWithTax = applyTax(subtotal);
-    saveOrderToDb(order, totalWithTax);
-    sendConfirmationEmail(order.getUser());
-    return totalWithTax;
-}
+```javascript
+function processOrder(order):
+    validateOrder(order)
+    variable subtotal = calculateSubtotal(order.items)
+    variable totalWithTax = applyTax(subtotal)
+    saveOrderToDb(order, totalWithTax)
+    sendConfirmationEmail(order.user)
+    
+    return totalWithTax
 ```
 
 ---
@@ -246,50 +142,23 @@ When a function takes more than 3 or 4 parameters, it becomes very hard to read.
 **How to fix:** Group related parameters into a single object or class.
 
 ### ❌ Smelly Code
-**Python:**
-```python
-def create_user(first_name, last_name, age, street, city, zip_code, country):
-    # Logic to create user
-    pass
-```
-
-**Java:**
-```java
-public void createUser(String firstName, String lastName, int age, String street, String city, String zipCode, String country) {
+```javascript
+function createUser(firstName, lastName, age, street, city, zipCode, country):
     // Logic to create user
-}
 ```
 
 ### ✅ Clean Code
 By grouping the address fields together, the method signature becomes much cleaner.
 
-**Python:**
-```python
+```javascript
 class Address:
-    def __init__(self, street, city, zip_code, country):
-        self.street = street
-        self.city = city
-        self.zip_code = zip_code
-        self.country = country
+    variable street
+    variable city
+    variable zipCode
+    variable country
 
-def create_user(first_name, last_name, age, address):
-    # Logic to create user
-    pass
-```
-
-**Java:**
-```java
-class Address {
-    String street;
-    String city;
-    String zipCode;
-    String country;
-    // Constructor and getters omitted for brevity
-}
-
-public void createUser(String firstName, String lastName, int age, Address address) {
+function createUser(firstName, lastName, age, address):
     // Logic to create user
-}
 ```
 
 ---
@@ -301,67 +170,35 @@ When you have `if` statements inside `if` statements inside `for` loops, the cod
 **How to fix:** Return early (use Guard Clauses) if a condition fails, rather than wrapping the rest of the function in a giant `if` block.
 
 ### ❌ Smelly Code
-**Python:**
-```python
-def apply_discount(user, cart):
-    if user is not None:
-        if user.is_active:
-            if cart is not None:
-                if len(cart.items) > 0:
-                    # The main logic is buried deep in here!
-                    return cart.total * 0.90
-    return cart.total if cart else 0
-```
-
-**Java:**
-```java
-public double applyDiscount(User user, Cart cart) {
-    if (user != null) {
-        if (user.isActive()) {
-            if (cart != null) {
-                if (!cart.getItems().isEmpty()) {
+```javascript
+function applyDiscount(user, cart):
+    if user != null:
+        if user.isActive == true:
+            if cart != null:
+                if cart.items.isEmpty() == false:
                     // The main logic is buried deep in here!
-                    return cart.getTotal() * 0.90;
-                }
-            }
-        }
-    }
-    return cart != null ? cart.getTotal() : 0;
-}
+                    return cart.total * 0.90
+                    
+    if cart != null:
+        return cart.total
+    return 0
 ```
 
 ### ✅ Clean Code
 Check for bad conditions first and exit immediately. The "happy path" (the main logic) stays flat at the bottom.
 
-**Python:**
-```python
-def apply_discount(user, cart):
-    # Guard clauses: handle invalid states and exit immediately
-    if user is None or not user.is_active:
-        return cart.total if cart else 0
-        
-    if cart is None or len(cart.items) == 0:
+```javascript
+function applyDiscount(user, cart):
+    // Guard clauses: handle invalid states and exit immediately
+    if user == null or user.isActive == false:
+        if cart != null: return cart.total
         return 0
         
-    # The main logic is now flat and easy to read
-    return cart.total * 0.90
-```
-
-**Java:**
-```java
-public double applyDiscount(User user, Cart cart) {
-    // Guard clauses: handle invalid states and exit immediately
-    if (user == null || !user.isActive()) {
-        return cart != null ? cart.getTotal() : 0;
-    }
-    
-    if (cart == null || cart.getItems().isEmpty()) {
-        return 0;
-    }
-    
+    if cart == null or cart.items.isEmpty() == true:
+        return 0
+        
     // The main logic is now flat and easy to read
-    return cart.getTotal() * 0.90;
-}
+    return cart.total * 0.90
 ```
 
 ---

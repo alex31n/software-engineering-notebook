@@ -1,4 +1,4 @@
-# Clean Code: Refactoring
+# Refactoring
 
 In software engineering, **Refactoring** is the process of changing the internal structure of existing code without changing its external behavior. 
 

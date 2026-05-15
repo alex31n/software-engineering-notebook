@@ -1,4 +1,4 @@
-# Clean Code: Meaningful Names
+# Meaningful Names
 
 One of the hardest and most important things in programming is naming things properly. We spend much more time *reading* code than writing it. If you name your variables, functions, and classes well, your code will read like a well-written book. If you name them poorly, your code will be like a confusing puzzle.
 
