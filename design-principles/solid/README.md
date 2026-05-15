@@ -1,6 +1,6 @@
 # SOLID Design Principles
 
-This directory contains a comprehensive guide to the **SOLID** design principles. These principles represent five essential guidelines for writing clean, maintainable, and scalable software.
+This document contains a comprehensive guide to the **SOLID** design principles. These principles represent five essential guidelines for writing clean, maintainable, and scalable software.
 
 By adhering to these principles, your code will be easier to understand, test, and refactor. Both Python and Java code examples are provided to ensure that developers across different paradigms can benefit from these concepts.
 
