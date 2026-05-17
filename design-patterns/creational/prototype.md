@@ -1,12 +1,12 @@
 # Prototype Design Pattern
 
+The Prototype Pattern is a creational design pattern that lets you copy existing objects without making your code dependent on their classes. Instead of creating new objects using the `new` keyword (which can be slow and complicated if the object has a lot of setup), you take an existing object and say, "Make a clone of yourself."
+
 Imagine you are playing a video game where you need to spawn thousands of identical enemies, like zombies. Creating each zombie from scratch (setting its health, speed, weapons, armor, etc.) takes a lot of time and computer memory.
 
 What if, instead of creating each one from scratch, you create just **one** perfect zombie and then just make **copies** (or clones) of it?
 
 That is exactly what the **Prototype Pattern** does!
-
-The Prototype Pattern is a creational design pattern that lets you copy existing objects without making your code dependent on their classes. Instead of creating new objects using the `new` keyword (which can be slow and complicated if the object has a lot of setup), you take an existing object and say, "Make a clone of yourself."
 
 ## Real-World Analogy
 
