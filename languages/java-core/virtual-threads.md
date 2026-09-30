@@ -183,7 +183,7 @@ Use these short, clear answers when the interviewer asks:
 
 ---
 
-## 9. 10-Second Recall Checklist
+## 9. Recall Checklist
 
 1. **Introduced in:** Java 21.
 2. **Key benefit:** Millions of threads, minimal memory (~few KB vs 1 MB).
